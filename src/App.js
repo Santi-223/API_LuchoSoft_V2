@@ -5,6 +5,7 @@ import cors from "cors";
 // Importar las rutas
 import comprasRoutes from "./routes/compras.routes";
 import configuracionRoutes from "./routes/configuracion.routes";
+import ventaRoutes from "./routes/ventas.routes";
 import authRoutes from "./routes/auth.routes";
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(express.json());
 // Rutas
 app.use("/compras", comprasRoutes);
 app.use("/configuracion", configuracionRoutes);
+app.use("/ventas", ventaRoutes);
 app.use("/auth", authRoutes);
 
 export default app;
