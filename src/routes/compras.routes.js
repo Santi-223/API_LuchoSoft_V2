@@ -35,6 +35,7 @@ router.put("/insumos/:id_insumo", comprasController.updateInsumos)
 router.put("/compras_insumos/:id_compras_insumos", comprasController.updateComprasInsumo)
 
 
-
+//Arley
+//eSTUVO aQUÍ
 export default router;
 

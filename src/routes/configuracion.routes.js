@@ -32,4 +32,5 @@ router.delete("/roles_permisos/:id_roles_permisos", validarJWT, configuracionCon
 router.delete("/usuarios/:id_usuario", validarJWT, tienePermiso(2), configuracionController.deleteUsuario)
 
 export default router;
-//arley Restrepo
+//arle
+// r
