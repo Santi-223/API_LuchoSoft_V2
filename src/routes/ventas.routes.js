@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { methods as ventasControllers } from "../constrollers/ventas.controllers";
+import { methods as ventasControllers } from "../controllers/ventas.controllers";
 const router = Router();
 
 router.get("/clientes", ventasControllers.getClientes);
