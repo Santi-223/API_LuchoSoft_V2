@@ -30,12 +30,12 @@ const consultPermiso = async(req, res) => {
 
 const postPermiso = async(req, res) => {
     try{
-        const {nombre_permiso, estado_permiso} = req.body;
+        const {id_permiso, nombre_permiso, estado_permiso} = req.body;
 
-        if (undefined || nombre_permiso == undefined || estado_permiso == undefined) {
+        if (id_permiso == undefined || nombre_permiso == undefined || estado_permiso == undefined) {
             res.status(400).json({message: "Error, por favor digite todos los datos."})
         }
-        const permisos = {nombre_permiso, estado_permiso}
+        const permisos = {id_permiso, nombre_permiso, estado_permiso}
         const connection= await getConnection()
         const result = await connection.query("INSERT INTO permisos SET ?", permisos )
         // res.json({message: "Registrado con éxito :D."})
@@ -116,12 +116,12 @@ const consultRol = async(req, res) => {
 
 const postRol = async(req, res) => {
     try{
-        const {nombre_rol, descripcion_rol, estado_rol} = req.body;
+        const {id_rol, nombre_rol, descripcion_rol, estado_rol} = req.body;
 
-        if ( nombre_rol == undefined || descripcion_rol == undefined || estado_rol == undefined) {
+        if ( id_rol == undefined || nombre_rol == undefined || descripcion_rol == undefined || estado_rol == undefined) {
             res.status(400).json({message: "Error, por favor digite todos los datos."})
         }
-        const roles = {nombre_rol, descripcion_rol, estado_rol}
+        const roles = {id_rol, nombre_rol, descripcion_rol, estado_rol}
         const connection= await getConnection()
         const result = await connection.query("INSERT INTO roles SET ?", roles )
         // res.json({message: "Registrado con éxito :D."})
