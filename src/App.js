@@ -6,6 +6,8 @@ import cors from "cors";
 import comprasRoutes from "./routes/compras.routes";
 import configuracionRoutes from "./routes/configuracion.routes";
 import ventaRoutes from "./routes/ventas.routes";
+import ventaRoutes from "./routes/ventas2.routes";
+import ordenRoutes from "./routes/orden.routes";
 import authRoutes from "./routes/auth.routes";
 
 const app = express();
@@ -22,6 +24,8 @@ app.use(express.json());
 app.use("/compras", comprasRoutes);
 app.use("/configuracion", configuracionRoutes);
 app.use("/ventas", ventaRoutes);
+app.use("/ventas2", ventaRoutes);
+app.use("/orden", ordenRoutes);
 app.use("/auth", authRoutes);
 
 export default app;
