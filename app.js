@@ -1,4 +1,4 @@
-import App from "./App";
+import App from "./Index";
 
 const main = () =>{
     App.listen(App.get("port"));
