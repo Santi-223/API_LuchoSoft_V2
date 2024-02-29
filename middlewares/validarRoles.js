@@ -2,15 +2,16 @@ import { response } from "express";
 
 const validarAdministrador = (req, res = response, next) => {
 
-    if(!req.usuario){
+    if (!req.usuario || !req.permisos) { // Verificar que req.usuario y req.usuario.permisos estén definidos
         return res.status(500).json({
             msg: "Debes validar el token antes de validar el rol."
         });
     }
 
     const {id_rol, nombre_usuario} = req.usuario;
+    const permisosUsuario = req.permisos;
 
-        if(id_rol != 1){
+        if(!permisosUsuario.includes(1)){
             return res.status(401).json({
                 msg: `${nombre_usuario} no es administrador, no puede acceder a esta función.`
             });
