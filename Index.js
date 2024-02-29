@@ -13,7 +13,7 @@ import authRoutes from "./routes/auth.routes";
 const app = express();
 
 // Configuraciones
-app.set("port", 4000);
+app.set("port", process.env.PORT || 4000);
 
 // Middlewares
 app.use(cors());
