@@ -41,7 +41,9 @@ const postCompra = async(req, res) => {
         const result = await connection.query("INSERT INTO compras SET ?", compras )
         // res.json({message: "Registrado con éxito :D."})
         console.log("Registrado con éxito")
-        res.json(result);
+        // Devuelve el ID de la compra que acabas de crear
+        const idCompraInsertada = result.id_compra;
+        res.json({ id_compra: idCompraInsertada, message: `Compra registrada con éxito. ID de compra: ${idCompraInsertada}` });
     }catch(error){
         res.status(500);
         res.send(error.message)
