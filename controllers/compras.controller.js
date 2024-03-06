@@ -42,7 +42,7 @@ const postCompra = async(req, res) => {
         // res.json({message: "Registrado con éxito :D."})
         console.log("Registrado con éxito")
         // Devuelve el ID de la compra que acabas de crear
-        const idCompraInsertada = result.id_compra;
+        const idCompraInsertada = result.insertId;
         res.json({ id_compra: idCompraInsertada, message: `Compra registrada con éxito. ID de compra: ${idCompraInsertada}` });
     }catch(error){
         res.status(500);
