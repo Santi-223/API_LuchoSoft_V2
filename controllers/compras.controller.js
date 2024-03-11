@@ -211,12 +211,12 @@ const consultCatInsumos = async(req, res) => {
 
 const postCatInsumos = async(req, res) => {
     try{
-        const {nombre_categoria_insumos, estado_categoria_insumos } = req.body;
+        const {id_categoria_insumos, nombre_categoria_insumos, estado_categoria_insumos } = req.body;
 
         if (nombre_categoria_insumos == undefined || estado_categoria_insumos == undefined) {
             res.status(400).json({message: "Error, por favor digite todos los datos."})
         }
-        const categoria_insumos = { nombre_categoria_insumos, estado_categoria_insumos }
+        const categoria_insumos = { id_categoria_insumos, nombre_categoria_insumos, estado_categoria_insumos }
         const connection= await getConnection()
         const result = await connection.query("INSERT INTO categoria_insumos SET ?", categoria_insumos )
         // res.json({message: "Registrado con éxito :D."})
@@ -296,13 +296,13 @@ const consultInsumos = async(req, res) => {
 
 const postInsumos = async(req, res) => {
     try{
-        const { id_insumo, imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumos } = req.body;
+        const { id_insumo, imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo } = req.body;
 
-        if ( id_insumo == undefined || nombre_insumo == undefined || unidadesDeMedida_insumo == undefined
-            || stock_insumo == undefined || estado_insumo == undefined || id_categoria_insumos == undefined) {
+        if ( nombre_insumo == undefined || unidadesDeMedida_insumo == undefined
+            || stock_insumo == undefined || estado_insumo == undefined || id_categoria_insumo == undefined) {
             res.status(400).json({message: "Error, por favor digite todos los datos."})
         }
-        const insumos = { id_insumo, imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumos }
+        const insumos = { id_insumo, imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo }
         const connection= await getConnection()
         const result = await connection.query("INSERT INTO insumos SET ?", insumos )
         // res.json({message: "Registrado con éxito :D."})
@@ -335,13 +335,13 @@ const updateInsumos = async(req, res) => {
     try{
         console.log(req.params)
         const {id_insumo}=req.params
-        const { imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumos } = req.body;
+        const { imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo } = req.body;
 
         if ( id_insumo == undefined || nombre_insumo == undefined || unidadesDeMedida_insumo == undefined
-            || stock_insumo == undefined || estado_insumo == undefined || id_categoria_insumos == undefined) {
+            || stock_insumo == undefined || estado_insumo == undefined || id_categoria_insumo == undefined) {
             res.status(400).json({message: "Error, por favor digite todos los datos."})
         }
-        const insumos = { imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumos }
+        const insumos = { imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo }
         const connection= await getConnection()
         const result=await connection.query("UPDATE insumos SET ? WHERE id_insumo = ?", [insumos, id_insumo])
         console.log(result)
