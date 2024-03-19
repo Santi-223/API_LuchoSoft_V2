@@ -156,6 +156,27 @@ const updateRol = async(req, res) => {
 
 };
 
+const updateEstadoRol = async (req, res) => {
+    try {
+        console.log(req.params);
+        const { id_rol } = req.params;
+        const {estado_rol} = req.body;
+    
+        // Obtener el estado inverso
+        const nuevoEstado = estado_rol;
+
+        const connection= await getConnection()
+        // Actualizar el estado en la base de datos
+        const result = await connection.query("UPDATE roles SET estado_rol = ? WHERE id_rol = ?", [nuevoEstado, id_rol]);
+        console.log(result);
+
+        res.json(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error interno del servidor." });
+    }
+};
+
 const deleteRol = async(req, res) => {
     try{
         console.log(req.params)
@@ -327,6 +348,28 @@ const updateUsuario = async(req, res) => {
 
 };
 
+const updateEstadoUsuario = async (req, res) => {
+    try {
+        console.log(req.params);
+        const { id_usuario } = req.params;
+        const {estado_usuario} = req.body;
+    
+        // Obtener el estado inverso
+        const nuevoEstado = estado_usuario;
+
+        const connection= await getConnection()
+        // Actualizar el estado en la base de datos
+        const result = await connection.query("UPDATE usuarios SET estado_usuario = ? WHERE id_usuario = ?", [nuevoEstado, id_usuario]);
+        console.log(result);
+
+        res.json(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error interno del servidor." });
+    }
+};
+
+
 const deleteUsuario = async(req, res) => {
     try{
         console.log(req.params)
@@ -354,6 +397,7 @@ export const methods = {
     consultRol,
     postRol,
     updateRol,
+    updateEstadoRol,
     deleteRol,
     getRolesPermisos,
     consultRolesPermisos,
@@ -364,6 +408,7 @@ export const methods = {
     consultUsuario,
     postUsuario,
     updateUsuario,
+    updateEstadoUsuario,
     deleteUsuario
 
 }
