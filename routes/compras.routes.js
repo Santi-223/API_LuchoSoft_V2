@@ -34,6 +34,9 @@ router.put("/categoria_insumos/:id_categoria_insumos", comprasController.updateC
 router.put("/insumos/:id_insumo", comprasController.updateInsumos)
 router.put("/compras_insumos/:id_compras_insumos", comprasController.updateComprasInsumo)
 
+router.put("/estadoCatInsumos/:id_categoria_insumos", comprasController.updateEstadoCatInsumos)
+router.put("/estadoInsumo/:id_insumo", comprasController.updateEstadoInsumos)
+router.put("/estadoProveedor/:id_proveedor", comprasController.updateEstadoProveedor)
 
 //Arley ya no ta
 export default router;
