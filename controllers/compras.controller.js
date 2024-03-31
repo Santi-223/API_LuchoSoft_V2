@@ -314,15 +314,19 @@ const updateEstadoCatInsumos = async (req, res) => {
 const getInsumos = async(req, res) => {
     try{
         const connection= await getConnection()
-        const result=await connection.query("SELECT * FROM insumos")
+        const result=await connection.query(`
+            SELECT i.*, ci.nombre_categoria_insumos AS nombre_categoria
+            FROM insumos i
+            INNER JOIN categoria_insumos ci ON i.id_categoria_insumo = ci.id_categoria_insumos
+        `);
         console.log(result)
         res.json(result);
     }catch(error){
         res.status(500);
         res.send(error.message)
     }
-
 };
+
 
 const consultInsumos = async(req, res) => {
     try{
