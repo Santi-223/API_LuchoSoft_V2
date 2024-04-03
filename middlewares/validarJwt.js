@@ -30,7 +30,7 @@ const validarJWT = async (req = request, res = response, next) => {
 
         if (usuario.estado_usuario == 0) {
             return res.status(401).json({ 
-                message: "Token no válido - El usuario está inactivo." 
+                msg: "Token no válido - El usuario está inactivo." 
             });
         }
 
