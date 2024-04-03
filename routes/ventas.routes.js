@@ -2,7 +2,6 @@ import { Router } from "express";
 import { methods as ventasControllers } from "../controllers/ventas.controllers";
 import { validarJWT } from "../middlewares/validarJwt";
 import { tienePermiso } from "../middlewares/validarRoles"; 
-import { validarAdministrador } from "../middlewares/validarRoles"; 
 
 const router = Router();
 
