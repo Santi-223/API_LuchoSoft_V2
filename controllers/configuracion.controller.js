@@ -353,7 +353,6 @@ const updateUsuario = async(req, res) => {
 
 };
 
-<<<<<<< HEAD
 const updateContraseña = async(req, res) => {
     try{
         console.log(req.params)
@@ -374,8 +373,6 @@ const updateContraseña = async(req, res) => {
 
 };
 
-=======
->>>>>>> origin/Santiago
 const updateEstadoUsuario = async (req, res) => {
     try {
         console.log(req.params);
@@ -436,10 +433,7 @@ export const methods = {
     consultUsuario,
     postUsuario,
     updateUsuario,
-<<<<<<< HEAD
     updateContraseña,
-=======
->>>>>>> origin/Santiago
     updateEstadoUsuario,
     deleteUsuario
 
