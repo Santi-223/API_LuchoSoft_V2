@@ -25,6 +25,7 @@ router.put("/roles/:id_rol", configuracionController.updateRol)
 router.put("/estadoRoles/:id_rol", configuracionController.updateEstadoRol)
 router.put("/roles_permisos/:id_roles_permisos", configuracionController.updateRolesPermisos)
 router.put("/usuarios/:id_usuario", configuracionController.updateUsuario)
+<<<<<<< HEAD
 router.put("/contrasenaUsuarios/:id_usuario", configuracionController.updateContraseña)
 router.put("/estadoUsuarios/:id_usuario", configuracionController.updateEstadoUsuario)
 
@@ -32,6 +33,14 @@ router.delete("/permisos/:id_permiso", validarJWT, tienePermiso(1), configuracio
 router.delete("/roles/:id_rol", validarJWT, tienePermiso(1), configuracionController.deleteRol)
 router.delete("/roles_permisos/:id_roles_permisos", validarJWT, tienePermiso(1), configuracionController.deleteRolesPermisos)
 router.delete("/usuarios/:id_usuario", validarJWT, tienePermiso(3), configuracionController.deleteUsuario)
+=======
+router.put("/estadoUsuarios/:id_usuario", configuracionController.updateEstadoUsuario)
+
+router.delete("/permisos/:id_permiso", validarJWT, validarAdministrador, configuracionController.deletePermiso)
+router.delete("/roles/:id_rol", configuracionController.deleteRol)
+router.delete("/roles_permisos/:id_roles_permisos", configuracionController.deleteRolesPermisos)
+router.delete("/usuarios/:id_usuario", configuracionController.deleteUsuario)
+>>>>>>> origin/Santiago
 
 export default router;
 //arle
