@@ -111,13 +111,13 @@ const getProveedor = async(req, res) => {
 
 const postProveedor = async(req, res) => {
     try{
-        const { id_proveedor, nombre_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor } = req.body;
+        const { id_proveedor, documento_proveedor, nombre_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor } = req.body;
 
-        if ( nombre_proveedor == undefined || telefono_proveedor == undefined
+        if ( nombre_proveedor == undefined || telefono_proveedor == undefined || documento_proveedor == undefined
             || direccion_proveedor == undefined || estado_proveedor == undefined) {
             res.status(400).json({message: "Error, por favor digite todos los datos."})
         }
-        const proveedor = { id_proveedor, nombre_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor }
+        const proveedor = { id_proveedor, documento_proveedor, nombre_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor }
         const connection= await getConnection()
         const result = await connection.query("INSERT INTO proveedores SET ?", proveedor )
         // res.json({message: "Registrado con éxito :D."})
@@ -166,13 +166,13 @@ const updateProveedor = async(req, res) => {
     try{
         console.log(req.params)
         const {id_proveedor}=req.params
-        const { nombre_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor } = req.body;
+        const { nombre_proveedor, documento_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor } = req.body;
 
-        if (nombre_proveedor == undefined || telefono_proveedor == undefined
+        if (nombre_proveedor == undefined || telefono_proveedor == undefined || documento_proveedor == undefined
             || direccion_proveedor == undefined || estado_proveedor == undefined) {
             res.status(400).json({message: "Error, por favor digite todos los datos."})
         }
-        const proveedores = { nombre_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor }
+        const proveedores = { nombre_proveedor, documento_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor }
         const connection= await getConnection()
         const result=await connection.query("UPDATE proveedores SET ? WHERE id_proveedor = ?", [proveedores, id_proveedor])
         console.log(result)
@@ -345,13 +345,13 @@ const consultInsumos = async(req, res) => {
 
 const postInsumos = async(req, res) => {
     try{
-        const { id_insumo, imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo } = req.body;
+        const { id_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo } = req.body;
 
         if ( nombre_insumo == undefined || unidadesDeMedida_insumo == undefined
             || stock_insumo == undefined || estado_insumo == undefined || id_categoria_insumo == undefined) {
             res.status(400).json({message: "Error, por favor digite todos los datos."})
         }
-        const insumos = { id_insumo, imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo }
+        const insumos = { id_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo }
         const connection= await getConnection()
         const result = await connection.query("INSERT INTO insumos SET ?", insumos )
         // res.json({message: "Registrado con éxito :D."})
@@ -384,13 +384,13 @@ const updateInsumos = async(req, res) => {
     try{
         console.log(req.params)
         const {id_insumo}=req.params
-        const { imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo } = req.body;
+        const { nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo } = req.body;
 
         if ( id_insumo == undefined || nombre_insumo == undefined || unidadesDeMedida_insumo == undefined
             || stock_insumo == undefined || estado_insumo == undefined || id_categoria_insumo == undefined) {
             res.status(400).json({message: "Error, por favor digite todos los datos."})
         }
-        const insumos = { imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo }
+        const insumos = { nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo }
         const connection= await getConnection()
         const result=await connection.query("UPDATE insumos SET ? WHERE id_insumo = ?", [insumos, id_insumo])
         console.log(result)
