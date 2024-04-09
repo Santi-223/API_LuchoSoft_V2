@@ -5,6 +5,7 @@ import { tienePermiso } from "../middlewares/validarRoles";
 
 const router = Router();
 
+router.get("/validarJwt", validarJWT, configuracionController.getToken);
 router.get("/permisos", configuracionController.getPermisos);
 router.get("/roles", configuracionController.getRoles);
 router.get("/roles_permisos", configuracionController.getRolesPermisos);

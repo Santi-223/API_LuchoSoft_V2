@@ -12,7 +12,7 @@ const getCompra = async (req, res) => {
         res.json(result);
     } catch (error) {
         res.status(500);
-        res.send(error.message);
+        res.send(error.msg);
     }
 };
 
@@ -27,7 +27,7 @@ const consultCompra = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -38,19 +38,19 @@ const postCompra = async(req, res) => {
 
         if (numero_compra == undefined || fecha_compra == undefined
             || estado_compra == undefined || total_compra == undefined || id_proveedor == undefined) {
-            res.status(400).json({message: "Error, por favor digite todos los datos."})
+            res.status(400).json({msg: "Error, por favor digite todos los datos."})
         }
         const compras = {numero_compra, fecha_compra, estado_compra, total_compra, id_proveedor }
         const connection= await getConnection()
         const result = await connection.query("INSERT INTO compras SET ?", compras )
-        // res.json({message: "Registrado con éxito :D."})
+        // res.json({msg: "Registrado con éxito :D."})
         console.log("Registrado con éxito")
         // Devuelve el ID de la compra que acabas de crear
         const idCompraInsertada = result.insertId;
-        res.json({ id_compra: idCompraInsertada, message: `Compra registrada con éxito. ID de compra: ${idCompraInsertada}` });
+        res.json({ id_compra: idCompraInsertada, msg: `Compra registrada con éxito. ID de compra: ${idCompraInsertada}` });
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -67,7 +67,7 @@ const deleteCompra = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -78,7 +78,7 @@ const updateCompra = async (req, res) => {
         const { estado_compra } = req.body;
 
         if (estado_compra === undefined) {
-            res.status(400).json({ message: "Error, por favor proporciona el nuevo estado de la compra." });
+            res.status(400).json({ msg: "Error, por favor proporciona el nuevo estado de la compra." });
             return;
         }
 
@@ -88,7 +88,7 @@ const updateCompra = async (req, res) => {
 
         res.json(result);
     } catch (error) {
-        res.status(500).send(error.message);
+        res.status(500).send(error.msg);
     }
 };
 
@@ -104,7 +104,7 @@ const getProveedor = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -115,17 +115,17 @@ const postProveedor = async(req, res) => {
 
         if ( nombre_proveedor == undefined || telefono_proveedor == undefined
             || direccion_proveedor == undefined || estado_proveedor == undefined) {
-            res.status(400).json({message: "Error, por favor digite todos los datos."})
+            res.status(400).json({msg: "Error, por favor digite todos los datos."})
         }
         const proveedor = { id_proveedor, nombre_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor }
         const connection= await getConnection()
         const result = await connection.query("INSERT INTO proveedores SET ?", proveedor )
-        // res.json({message: "Registrado con éxito :D."})
+        // res.json({msg: "Registrado con éxito :D."})
         console.log("Registrado con éxito")
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 
@@ -141,7 +141,7 @@ const consultProveedor = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -157,7 +157,7 @@ const deleteProveedor = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -170,7 +170,7 @@ const updateProveedor = async(req, res) => {
 
         if (nombre_proveedor == undefined || telefono_proveedor == undefined
             || direccion_proveedor == undefined || estado_proveedor == undefined) {
-            res.status(400).json({message: "Error, por favor digite todos los datos."})
+            res.status(400).json({msg: "Error, por favor digite todos los datos."})
         }
         const proveedores = { nombre_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor }
         const connection= await getConnection()
@@ -179,7 +179,7 @@ const updateProveedor = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -201,7 +201,7 @@ const updateEstadoProveedor = async (req, res) => {
         res.json(result);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Error interno del servidor." });
+        res.status(500).json({ msg: "Error interno del servidor." });
     }
 };
 
@@ -213,7 +213,7 @@ const getCatInsumos = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -228,7 +228,7 @@ const consultCatInsumos = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -238,17 +238,17 @@ const postCatInsumos = async(req, res) => {
         const {id_categoria_insumos, nombre_categoria_insumos, estado_categoria_insumos } = req.body;
 
         if (nombre_categoria_insumos == undefined || estado_categoria_insumos == undefined) {
-            res.status(400).json({message: "Error, por favor digite todos los datos."})
+            res.status(400).json({msg: "Error, por favor digite todos los datos."})
         }
         const categoria_insumos = { id_categoria_insumos, nombre_categoria_insumos, estado_categoria_insumos }
         const connection= await getConnection()
         const result = await connection.query("INSERT INTO categoria_insumos SET ?", categoria_insumos )
-        // res.json({message: "Registrado con éxito :D."})
+        // res.json({msg: "Registrado con éxito :D."})
         console.log("Registrado con éxito")
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -264,7 +264,7 @@ const deleteCatInsumos = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -276,7 +276,7 @@ const updateCatInsumos = async(req, res) => {
         const { nombre_categoria_insumos, estado_categoria_insumos } = req.body;
 
         if ( id_categoria_insumos == undefined || nombre_categoria_insumos == undefined || estado_categoria_insumos == undefined) {
-            res.status(400).json({message: "Error, por favor digite todos los datos."})
+            res.status(400).json({msg: "Error, por favor digite todos los datos."})
         }
         const categoria_insumos = { nombre_categoria_insumos, estado_categoria_insumos }
         const connection= await getConnection()
@@ -285,7 +285,7 @@ const updateCatInsumos = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -307,7 +307,7 @@ const updateEstadoCatInsumos = async (req, res) => {
         res.json(result);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Error interno del servidor." });
+        res.status(500).json({ msg: "Error interno del servidor." });
     }
 };
 
@@ -323,7 +323,7 @@ const getInsumos = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 };
 
@@ -338,7 +338,7 @@ const consultInsumos = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -349,17 +349,17 @@ const postInsumos = async(req, res) => {
 
         if ( nombre_insumo == undefined || unidadesDeMedida_insumo == undefined
             || stock_insumo == undefined || estado_insumo == undefined || id_categoria_insumo == undefined) {
-            res.status(400).json({message: "Error, por favor digite todos los datos."})
+            res.status(400).json({msg: "Error, por favor digite todos los datos."})
         }
         const insumos = { id_insumo, imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo }
         const connection= await getConnection()
         const result = await connection.query("INSERT INTO insumos SET ?", insumos )
-        // res.json({message: "Registrado con éxito :D."})
+        // res.json({msg: "Registrado con éxito :D."})
         console.log("Registrado con éxito")
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -375,7 +375,7 @@ const deleteInsumos = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -388,7 +388,7 @@ const updateInsumos = async(req, res) => {
 
         if ( id_insumo == undefined || nombre_insumo == undefined || unidadesDeMedida_insumo == undefined
             || stock_insumo == undefined || estado_insumo == undefined || id_categoria_insumo == undefined) {
-            res.status(400).json({message: "Error, por favor digite todos los datos."})
+            res.status(400).json({msg: "Error, por favor digite todos los datos."})
         }
         const insumos = { imagen_insumo, nombre_insumo, unidadesDeMedida_insumo, stock_insumo, estado_insumo, id_categoria_insumo }
         const connection= await getConnection()
@@ -397,7 +397,7 @@ const updateInsumos = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -419,7 +419,7 @@ const updateEstadoInsumos = async (req, res) => {
         res.json(result);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Error interno del servidor." });
+        res.status(500).json({ msg: "Error interno del servidor." });
     }
 };
 
@@ -431,7 +431,7 @@ const getComprasInsumo = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -446,7 +446,7 @@ const consultComprasInsumo = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -457,18 +457,18 @@ const postComprasInsumo = async(req, res) => {
 
         if ( cantidad_insumo_compras_insumos == undefined || precio_insumo_compras_insumos == undefined || id_compra == undefined
             || id_insumo == undefined) {
-            res.status(400).json({message: "Error, por favor digite todos los datos."})
+            res.status(400).json({msg: "Error, por favor digite todos los datos."})
         }
 
         const compras_insumos = { cantidad_insumo_compras_insumos, precio_insumo_compras_insumos, id_compra , id_insumo }
         const connection= await getConnection()
         const result = await connection.query("INSERT INTO compras_insumos SET ?", compras_insumos )
-        // res.json({message: "Registrado con éxito :D."})
+        // res.json({msg: "Registrado con éxito :D."})
         console.log("Registrado con éxito")
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -484,7 +484,7 @@ const deleteComprasInsumo = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
@@ -497,7 +497,7 @@ const updateComprasInsumo = async(req, res) => {
 
         if ( cantidad_insumo_compras_insumos == undefined || precio_insumo_compras_insumos == undefined
             || id_compra == undefined || id_insumo == undefined) {
-            res.status(400).json({message: "Error, por favor digite todos los datos."})
+            res.status(400).json({msg: "Error, por favor digite todos los datos."})
         }
         const compras_insumos = { cantidad_insumo_compras_insumos, precio_insumo_compras_insumos, id_compra , id_insumo }
         const connection= await getConnection()
@@ -506,7 +506,7 @@ const updateComprasInsumo = async(req, res) => {
         res.json(result);
     }catch(error){
         res.status(500);
-        res.send(error.message)
+        res.send(error.msg)
     }
 
 };
