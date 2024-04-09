@@ -102,7 +102,7 @@ const getPedido = async (req, res)=>{
 const postPedido = async (req, res)=>{
     try{
         const{id_pedido, observaciones, fecha_venta, fecha_pedido, estado_pedido, total_venta, total_pedido,id_cliente, id_usuario} = req.body;
-        if (id_pedido == undefined ||observaciones ==undefined || fecha_venta== undefined || fecha_pedido==undefined || estado_pedido == undefined || total_venta == undefined || total_pedido == undefined||id_cliente==undefined || id_usuario == undefined){
+        if (observaciones ==undefined || fecha_venta== undefined || fecha_pedido==undefined || estado_pedido == undefined || total_venta == undefined || total_pedido == undefined||id_cliente==undefined || id_usuario == undefined){
             res.status(500).json({msg: "mala petición. Por favor llenar los campos"})
         }
         
