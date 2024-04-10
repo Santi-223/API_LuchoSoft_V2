@@ -38,11 +38,11 @@ const login = async (req, res) => {
 
         //Json web token
 
-        const token = await generarJWT(usuario.id_usuario, permisos)
+        const token = await generarJWT(usuario.id_usuario, usuario, permisos)
 
 
         // Si llegamos aquí, significa que el usuario fue encontrado
-        res.json({ token, usuario, permisos });
+        res.json({ token });
 
     } catch (error) {
         res.status(500).send(error.msg);
