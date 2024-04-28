@@ -21,31 +21,31 @@ const login = async (req, res) => {
         console.log('Los id_permiso para el id_rol', id_rol, 'son:', permisos);
 
         if (usuarios.length === 0) {
-            res.status(400).json({ message: "El email no se encuentra registrado." });
+            res.status(400).json({ msg: "El email no se encuentra registrado." });
             return; // Agregamos un return para salir de la función en este punto si no se encuentra el usuario
         }
 
 
         if (usuario.estado_usuario == 0) {
-            res.status(400).json({ message: "El usuario está inactivo." });
+            res.status(400).json({ msg: "El usuario está inactivo." });
             return;
         }
 
         if (usuario.contraseña != contraseña){
-            res.status(400).json({message: "La contraseña es incorrecta."})
+            res.status(400).json({msg: "La contraseña es incorrecta."})
             return;
         }
 
         //Json web token
 
-        const token = await generarJWT(usuario.id_usuario, permisos)
+        const token = await generarJWT(usuario.id_usuario, usuario, permisos)
 
 
         // Si llegamos aquí, significa que el usuario fue encontrado
-        res.json({ token, usuario, permisos });
+        res.json({ token });
 
     } catch (error) {
-        res.status(500).send(error.message);
+        res.status(500).send(error.msg);
     }
 };
 

@@ -25,6 +25,11 @@ router.put("/categoria_productos/:id_categoria_productos", ventasControllers.upd
 router.delete("/productos/:id_producto", ventasControllers.deleteProducto);
 router.delete("/categoria_productos/:id_categoria_productos", ventasControllers.deleteCategoria_producto);
 
+router.put("/estadoProducto/:id_producto", ventasControllers.updateEstadoProductos)
+router.put("/estadoCategoria/:id_categoria_productos", ventasControllers.updateEstadoCategorias)
+
+
+
 
 
 export default router;
