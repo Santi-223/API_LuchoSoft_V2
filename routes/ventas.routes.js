@@ -9,6 +9,7 @@ router.get("/pedidos_productos", ventasControllers.getPedidosProductos);
 router.get("/clientes/:id_cliente", ventasControllers.getCliente);
 router.get("/pedidos/:id_pedido", ventasControllers.getPedido);
 router.get("/pedidos_productos/:id_pedidos_productos", ventasControllers.consultPedidosProductos);
+router.get("/pedidos_productos/pedidos/:id_pedido", ventasControllers.consultPedidosProductos2);
 
 router.post("/clientes", ventasControllers.postCliente);
 router.post("/pedidos", ventasControllers.postPedido);
