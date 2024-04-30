@@ -191,24 +191,31 @@ const updateEstadoRol = async (req, res) => {
     }
 };
 
-const deleteRol = async(req, res) => {
-    try{
+const deleteRol = async (req, res) => {
+    try {
         console.log(req.params)
-        const {id_rol}=req.params
+        const { id_rol } = req.params
         
-        const connection= await getConnection()
+        const connection = await getConnection()
 
+        // Verificar si hay usuarios con el id_rol especificado
+        const vfc = await connection.query("SELECT COUNT(*) AS count FROM usuarios WHERE id_rol = ?", id_rol);
+
+        if (vfc[0].count > 0) {
+            // Si se encuentra al menos un usuario con el id_rol, devuelve un error
+            return res.status(400).json({ msg: 'No se puede eliminar el rol porque hay usuarios asociados.' });
+        }
+
+        // Si no hay usuarios con el id_rol, procede con las eliminaciones
         await connection.query("DELETE FROM roles_permisos WHERE id_rol = ?", id_rol);
+        await connection.query("DELETE FROM roles WHERE id_rol = ?", id_rol);
         
-        await connection.query("DELETE FROM roles WHERE id_rol = ?", id_rol)
-
         res.json({ msg: 'Rol eliminado correctamente' });
-    }catch(error){
-        res.status(500);
-        res.send(error.msg)
+    } catch (error) {
+        res.status(500).send(error.msg);
     }
-
 };
+
 
 const getRolesPermisos = async(req, res) => {
     try{
