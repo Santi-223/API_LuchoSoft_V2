@@ -197,9 +197,12 @@ const deleteRol = async(req, res) => {
         const {id_rol}=req.params
         
         const connection= await getConnection()
-        const result=await connection.query("DELETE FROM roles WHERE id_rol = ?", id_rol)
-        console.log(result)
-        res.json(result);
+        
+        await connection.query("DELETE FROM roles WHERE id_rol = ?", id_rol)
+
+        await connection.query("DELETE FROM roles_permisos WHERE id_rol = ?", id_rol);
+
+        res.json({ msg: 'Rol eliminado correctamente' });
     }catch(error){
         res.status(500);
         res.send(error.msg)
