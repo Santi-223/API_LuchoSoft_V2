@@ -1,4 +1,5 @@
 import { getConnection } from "../database/database"
+const jwt = require('jsonwebtoken');
 
 const getToken = async(req, res) => {
     try{
@@ -392,6 +393,41 @@ const updateContraseña = async(req, res) => {
 
 };
 
+const recuperarContrasena = async(req, res) => {
+    try{
+        const token = req.header('token');
+        const {nuevaContraseña} = req.body;
+        const {email} = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
+
+        console.log("email en token: ", email)
+
+        if (!token || !nuevaContraseña || !email) {
+            return res.status(400).json({msg: "Error, por favor digite todos los datos."})
+        }
+
+        const connection= await getConnection()
+
+        const vfc = await connection.query("SELECT COUNT(*) AS count FROM usuarios WHERE email = ?", email);
+
+        if (vfc[0].count > 0) {
+
+            const result=await connection.query("UPDATE usuarios SET contraseña = ? WHERE email = ?", [nuevaContraseña, email])
+            console.log(result)
+            return res.json({msg: 'La contraseña se ha restablecido exitosamente'});
+
+        }else{
+
+            return res.status(400).json({ msg: "Error, el email no se encuentra registrado." })
+
+        }
+
+    }catch(error){
+        res.status(500);
+        res.send(error.msg)
+    }
+
+};
+
 const updateEstadoUsuario = async (req, res) => {
     try {
         console.log(req.params);
@@ -453,6 +489,7 @@ export const methods = {
     consultUsuario,
     postUsuario,
     updateUsuario,
+    recuperarContrasena,
     updateContraseña,
     updateEstadoUsuario,
     deleteUsuario

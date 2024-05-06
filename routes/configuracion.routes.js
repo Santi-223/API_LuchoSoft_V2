@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { methods as configuracionController } from "../controllers/configuracion.controller";
-import { validarJWT } from "../middlewares/validarJwt";
+import { methods as nodemailerController } from "../controllers/nodemailer.controller";
+import { validarJWT, validarJWTRecuperacion } from "../middlewares/validarJwt";
 import { tienePermiso } from "../middlewares/validarRoles"; 
 
 const router = Router();
@@ -20,6 +21,7 @@ router.post("/permisos", configuracionController.postPermiso)
 router.post("/roles", configuracionController.postRol)
 router.post("/roles_permisos", configuracionController.postRolesPermisos)
 router.post("/usuarios", configuracionController.postUsuario)
+router.post("/enviarCorreo", nodemailerController.postCorreo)
 
 router.put("/permisos/:id_permiso", configuracionController.updatePermiso)
 router.put("/roles/:id_rol", configuracionController.updateRol)
@@ -28,6 +30,7 @@ router.put("/roles_permisos/:id_roles_permisos", configuracionController.updateR
 router.put("/usuarios/:id_usuario", configuracionController.updateUsuario)
 router.put("/contrasenaUsuarios/:id_usuario", configuracionController.updateContraseña)
 router.put("/estadoUsuarios/:id_usuario", configuracionController.updateEstadoUsuario)
+router.put("/recuperarContrasena", validarJWTRecuperacion, configuracionController.recuperarContrasena)
 
 router.delete("/permisos/:id_permiso", validarJWT, tienePermiso(1), configuracionController.deletePermiso)
 router.delete("/roles/:id_rol", validarJWT, tienePermiso(1), configuracionController.deleteRol)
