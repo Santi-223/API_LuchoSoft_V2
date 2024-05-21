@@ -40,7 +40,7 @@ const postCorreo = async (req, res) => {
                 to: email, // list of receivers
                 subject: "Recuperación de contraseña.", // Subject line
                 text: "Hello world?", // plain text body
-                html:`<b><a href='https://luchosoftreact.onrender.com/#/recuperarContrasena2/${token}'>http://localhost:5173/#/recuperarContrasena2/${token}</a></b>`, // html body
+                html:`<b><a href='https://luchosoftreact.onrender.com/#/recuperarContrasena2/${token}'>https://luchosoftreact.onrender.com/#/recuperarContrasena2/${token}</a></b>`, // html body
             });
 
             return res.json({ msg: 'El correo de recuperacion se ha enviado exitosamente.', token: token });
