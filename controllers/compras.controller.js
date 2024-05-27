@@ -111,13 +111,13 @@ const getProveedor = async(req, res) => {
 
 const postProveedor = async(req, res) => {
     try{
-        const { id_proveedor, documento_proveedor, nombre_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor } = req.body;
+        const { id_proveedor, documento_proveedor, nombre_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor, tipo_documento } = req.body;
 
         if ( nombre_proveedor == undefined || telefono_proveedor == undefined || documento_proveedor == undefined
-            || direccion_proveedor == undefined || estado_proveedor == undefined) {
+            || direccion_proveedor == undefined || estado_proveedor == undefined || tipo_documento == undefined) {
             res.status(400).json({message: "Error, por favor digite todos los datos."})
         }
-        const proveedor = { id_proveedor, documento_proveedor, nombre_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor }
+        const proveedor = { id_proveedor, documento_proveedor, nombre_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor, tipo_documento }
         const connection= await getConnection()
         const result = await connection.query("INSERT INTO proveedores SET ?", proveedor )
         // res.json({message: "Registrado con éxito :D."})
@@ -162,27 +162,49 @@ const deleteProveedor = async(req, res) => {
 
 };
 
-const updateProveedor = async(req, res) => {
-    try{
-        console.log(req.params)
-        const {id_proveedor}=req.params
-        const { nombre_proveedor, documento_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor } = req.body;
+const updateProveedor = async (req, res) => {
+    try {
+        const { id_proveedor } = req.params;
+        const { nombre_proveedor, documento_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor, tipo_documento } = req.body;
 
-        if (nombre_proveedor == undefined || telefono_proveedor == undefined || documento_proveedor == undefined
-            || direccion_proveedor == undefined || estado_proveedor == undefined) {
-            res.status(400).json({message: "Error, por favor digite todos los datos."})
+        // Verificar si al menos un campo está presente en la solicitud
+        if (nombre_proveedor === undefined && documento_proveedor === undefined && telefono_proveedor === undefined && direccion_proveedor === undefined && estado_proveedor === undefined && tipo_documento === undefined) {
+            res.status(400).json({ message: "Error, al menos uno de los campos debe ser proporcionado para actualizar." });
+            return;
         }
-        const proveedores = { nombre_proveedor, documento_proveedor, telefono_proveedor, direccion_proveedor, estado_proveedor }
-        const connection= await getConnection()
-        const result=await connection.query("UPDATE proveedores SET ? WHERE id_proveedor = ?", [proveedores, id_proveedor])
-        console.log(result)
-        res.json(result);
-    }catch(error){
-        res.status(500);
-        res.send(error.message)
-    }
 
+        const proveedores = {}; // Objeto para almacenar los campos a actualizar
+
+        // Agregar los campos presentes en la solicitud al objeto de proveedores
+        if (nombre_proveedor !== undefined) {
+            proveedores.nombre_proveedor = nombre_proveedor;
+        }
+        if (documento_proveedor !== undefined) {
+            proveedores.documento_proveedor = documento_proveedor;
+        }
+        if (telefono_proveedor !== undefined) {
+            proveedores.telefono_proveedor = telefono_proveedor;
+        }
+        if (direccion_proveedor !== undefined) {
+            proveedores.direccion_proveedor = direccion_proveedor;
+        }
+        if (estado_proveedor !== undefined) {
+            proveedores.estado_proveedor = estado_proveedor;
+        }
+                if (tipo_documento !== undefined) {
+            proveedores.tipo_documento = tipo_documento;
+        }
+
+        const connection = await getConnection();
+        const result = await connection.query("UPDATE proveedores SET ? WHERE id_proveedor = ?", [proveedores, id_proveedor]);
+        console.log(result);
+
+        res.json(result);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 };
+
 
 const updateEstadoProveedor = async (req, res) => {
     try {
