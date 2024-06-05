@@ -116,8 +116,10 @@ const updateProducto = async (req, res) => {
 
         const { id_producto } = req.params;
         const {nombre_producto, descripcion_producto, estado_producto, precio_producto, id_categoria_producto } = req.body;
-        if (imagen_producto == undefined || nombre_producto == undefined || descripcion_producto == undefined || estado_producto == undefined || precio_producto == undefined || id_categoria_producto == undefined) {
-            res.status(500).json({ msg: "mala petición. Por favor llenar los campos" })
+
+        if (nombre_producto == "" || descripcion_producto == ""
+            || estado_producto == "" || precio_producto == "" || id_categoria_producto == "") {
+            return res.status(400).json({ msg: "Error, por favor digite todos los datos." })
         }
 
         const producto = { id_producto, imagen_producto, nombre_producto, descripcion_producto, estado_producto, precio_producto, id_categoria_producto }
