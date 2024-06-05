@@ -25,19 +25,51 @@ const getProducto = async (req, res)=>{
     }
 };
 
-const postProducto = async (req, res)=>{
-    try{
-        const{imagen_producto, nombre_producto, descripcion_producto, estado_producto, precio_producto, id_categoria_producto} = req.body;
-        if (imagen_producto ==undefined || nombre_producto== undefined || descripcion_producto==undefined || estado_producto == undefined || precio_producto == undefined || id_categoria_producto == undefined){
-            res.status(500).json({msg: "mala petición. Por favor llenar los campos"})
+const postProducto = async (req, res) => {
+    try {
+
+        var imagen_producto
+
+        // Verificar si el archivo fue subido
+        if (!req.file) {
+            imagen_producto = 'https://instalacionesherman.com/wp-content/uploads/2018/04/Imagen_por_defecto-600x450.png'
+        } else {
+            const result2 = await cloudinary.uploader.upload(req.file.path);
+            console.log('url de la img: ', result2.url);
+
+            // Eliminar la imagen local después de subirla a Cloudinary
+            fs.unlink(req.file.path, (err) => {
+                if (err) {
+                    console.error('Error al eliminar la imagen local:', err);
+                } else {
+                    console.log('Imagen local eliminada');
+                }
+            });
+
+
+            imagen_producto = result2.url;
         }
-        
-        const producto = {imagen_producto, nombre_producto, descripcion_producto, estado_producto, precio_producto, id_categoria_producto}
+
+
+        const { nombre_producto, descripcion_producto, estado_producto, precio_producto, id_categoria_producto } = req.body;
+        /*
+        if (nombre_producto == undefined || descripcion_producto == undefined || estado_producto == undefined || precio_producto == undefined || id_categoria_producto == undefined) {
+            res.status(500).json({ msg: "mala petición. Por favor llenar los capos" })
+        }
+        */
+
+        if (nombre_producto == "" || descripcion_producto == "" || estado_producto == "" || precio_producto == "" || id_categoria_producto == "") {
+            res.status(500).json({ msg: "mala petición. Por favor llenar los capos" })
+        }
+
+        const producto = { imagen_producto, nombre_producto, descripcion_producto, estado_producto, precio_producto, id_categoria_producto }
         const connection = await getConnection();
         await connection.query("INSERT INTO productos SET ?", producto);
-        res.json({msg: "Producto añadido"})
-        
-    } catch(error){
+        res.json({ msg: "Producto añadido" })
+
+
+
+    } catch (error) {
         res.status(500);
         res.send(error.msg)
     }
