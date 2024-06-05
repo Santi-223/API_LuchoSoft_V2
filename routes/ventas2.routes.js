@@ -1,5 +1,10 @@
 import { Router } from "express";
 import { methods as ventasControllers } from "../controllers/ventas2.controllers";
+
+const multer = require("multer")
+
+const upload = multer ({ dest : "uploads" })
+
 const router = Router();
 
 
@@ -12,7 +17,7 @@ router.get("/categoria_productos/:id_categoria_productos", ventasControllers.get
 
 
 
-router.post("/productos", ventasControllers.postProducto);
+router.post("/productos",  upload.single('imgProducto'), ventasControllers.postProducto);
 router.post("/categoria_productos", ventasControllers.postCategoria_producto);
 
 
