@@ -22,7 +22,7 @@ router.post("/categoria_productos", ventasControllers.postCategoria_producto);
 
 
 
-router.put("/productos/:id_producto", ventasControllers.updateProducto);
+router.put("/productos/:id_producto", upload.single('imgProducto'), ventasControllers.updateProducto);
 router.put("/categoria_productos/:id_categoria_productos", ventasControllers.updateCategoria_producto);
 
 
