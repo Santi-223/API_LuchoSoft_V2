@@ -36,9 +36,11 @@ const login = async (req, res) => {
             return;
         }
 
+        const { contraseña: _, ...usuarioSinContraseña } = usuario;
+
         //Json web token
 
-        const token = await generarJWT(usuario.id_usuario, usuario, permisos)
+        const token = await generarJWT(usuario.id_usuario, usuarioSinContraseña, permisos)
 
 
         // Si llegamos aquí, significa que el usuario fue encontrado
