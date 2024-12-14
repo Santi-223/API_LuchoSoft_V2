@@ -8,7 +8,9 @@ const login = async (req, res) => {
         const connection = await getConnection();
         const usuarios = await connection.query("SELECT * FROM usuarios WHERE email = ?", email);
 
-        const usuario = usuarios[0]; // Tomamos el primer usuario encontrado
+        const [usuario] = usuarios[0]; // Tomamos el primer usuario encontrado
+
+        console.log(usuario)
 
         const id_rol = usuario.id_rol;
 

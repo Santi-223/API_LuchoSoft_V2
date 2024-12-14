@@ -24,7 +24,7 @@ const postCorreo = async (req, res) => {
 
         const usuarios = await connection.query("SELECT * FROM usuarios WHERE email = ?", email);
 
-        const usuario = usuarios[0]; // Tomamos el primer usuario encontrado
+        const [usuario] = usuarios[0]; // Tomamos el primer usuario encontrado
 
         if (usuarios.length > 0) {
 
