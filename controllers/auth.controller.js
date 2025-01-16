@@ -12,11 +12,14 @@ const login = async (req, res) => {
 
         const id_rol = usuario.id_rol;
 
+        console.log("id rol: ", id_rol)
+
         // Ejecutar la consulta con el id_rol proporcionado
         const rows = await connection.query("SELECT id_permiso FROM roles_permisos WHERE id_rol = ?", id_rol);
 
         // Almacenar los id_permiso en un array
         const permisos = rows.map(row => row.id_permiso);
+
 
         console.log('Los id_permiso para el id_rol', id_rol, 'son:', permisos);
 

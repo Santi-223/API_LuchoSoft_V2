@@ -1,4 +1,4 @@
-import { getConnection } from "../database/database"
+import { getConnection } from "../database/database";
 
 const getCompra = async (req, res) => {
     try {
