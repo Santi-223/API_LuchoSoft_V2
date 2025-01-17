@@ -319,24 +319,17 @@ const getUsuarios = async (req, res) => {
 
 const consultUsuario = async (req, res) => {
     try {
-        const { id_usuario } = req.params;
-
-        if (!id_usuario) {
-            return res.status(400).json({ msg: "Error, el ID del usuario es obligatorio." });
-        }
-
-        const connection = await getConnection();
-        const result = await connection.query("SELECT * FROM usuarios WHERE id_usuario = ?", [id_usuario]);
-
-        if (result.length === 0) {
-            return res.status(404).json({ msg: "Usuario no encontrado." });
-        }
-
-        res.status(200).json(result[0]);
+        console.log(req.params)
+        const { id_usuario } = req.params
+        const connection = await getConnection()
+        const result = await connection.query("SELECT * FROM usuarios WHERE id_usuario = ?", id_usuario)
+        console.log(result)
+        res.json(result);
     } catch (error) {
-        console.error("Error al consultar usuario:", error);
-        res.status(500).json({ msg: "Error interno del servidor." });
+        res.status(500);
+        res.send(error.msg)
     }
+
 };
 
 
