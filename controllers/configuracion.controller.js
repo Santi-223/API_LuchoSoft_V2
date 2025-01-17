@@ -326,7 +326,7 @@ const consultUsuario = async (req, res) => {
         }
 
         const connection = await getConnection();
-        const [result] = await connection.query("SELECT * FROM usuarios WHERE id_usuario = ?", [id_usuario]);
+        const result = await connection.query("SELECT * FROM usuarios WHERE id_usuario = ?", [id_usuario]);
 
         if (result.length === 0) {
             return res.status(404).json({ msg: "Usuario no encontrado." });
