@@ -9,8 +9,8 @@ const connection = mysql.createPool({
     user: config.user,
     password: config.password,
     waitForConnections: true,
-    connectionLimit: 30,  // Límite de conexiones simultáneas
-    queueLimit: 30
+    connectionLimit: 0,  // Límite de conexiones simultáneas
+    queueLimit: 0
 });
 
 const getConnection = async () => {
